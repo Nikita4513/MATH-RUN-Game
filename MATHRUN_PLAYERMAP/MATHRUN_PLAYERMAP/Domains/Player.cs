@@ -26,8 +26,6 @@ namespace Domains_MATH_RUN
             {
                 for (var dy = -1; dy <= 1; dy++)
                 {
-                    if (x + dx == 6 && y + dy == 1)
-                        ;
                     if (dx != 0 || dy != 0)
                         if (x + dx >= 0 && x + dx < Field.Width
                              && y + dy >= 0 && y + dy < Field.Height)
@@ -49,6 +47,8 @@ namespace Domains_MATH_RUN
                 && Location == otherPlayer.Location
                 && Health == otherPlayer.Health;
         }
+
+        
     }
 
 
