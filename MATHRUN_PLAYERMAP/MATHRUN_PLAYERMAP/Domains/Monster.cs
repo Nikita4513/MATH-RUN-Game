@@ -15,6 +15,13 @@ namespace Domains_MATH_RUN
             Field = field;
             Location = new Point(x, y);
         }
+
+        public void MoveNext()
+        {
+            throw new NotImplementedException();
+        }
+
+
         private Point GetNextPoint()
         {
             var x = Location.X;
@@ -44,6 +51,8 @@ namespace Domains_MATH_RUN
                 && Field.Equals(otherMonster.Field)
                 && Location == otherMonster.Location;
         }
+
+        
     }
 
 

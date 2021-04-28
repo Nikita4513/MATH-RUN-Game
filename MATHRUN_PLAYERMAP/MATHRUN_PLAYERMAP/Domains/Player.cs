@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domains_MATH_RUN.Domains;
+using System;
 using System.Drawing;
 
 namespace Domains_MATH_RUN
@@ -15,6 +16,16 @@ namespace Domains_MATH_RUN
         {
             Field = field;
             Location = new Point(x, y);
+        }
+
+        public void MoveNext()
+        {
+            var nextPoint = this.GetNextPoint();
+            if (Field.Map[nextPoint.X, nextPoint.Y] == null)
+            {
+                Field.Map[Location.X, Location.Y] = new VisitedPoint(Location.X, Location.Y);
+                Field.Map[nextPoint.X, nextPoint.Y] = new Player(nextPoint.X, nextPoint.Y, Field);
+            }
         }
 
         private Point GetNextPoint()
@@ -37,6 +48,11 @@ namespace Domains_MATH_RUN
             throw new Exception("There is no next move");
         }
 
+        private void Swap(Point current, Point next)
+        {
+            
+        }
+
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -47,8 +63,6 @@ namespace Domains_MATH_RUN
                 && Location == otherPlayer.Location
                 && Health == otherPlayer.Health;
         }
-
-        
     }
 
 
