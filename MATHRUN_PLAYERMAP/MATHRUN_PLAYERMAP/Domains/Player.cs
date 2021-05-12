@@ -21,11 +21,11 @@ namespace Domains_MATH_RUN
         public void MoveNext()
         {
             var nextPoint = this.GetNextPoint();
-            if (Field.Map[nextPoint.X, nextPoint.Y] == null)
-            {
-                Field.Map[Location.X, Location.Y] = new VisitedPoint(Location.X, Location.Y);
-                Field.Map[nextPoint.X, nextPoint.Y] = new Player(nextPoint.X, nextPoint.Y, Field);
-            }
+            if (nextPoint.X == int.MaxValue)
+                return;
+            Field.Map[NextPoint.X, NextPoint.Y] = Field.Map[Location.X, Location.Y];
+            Field.Map[Location.X, Location.Y] = new VisitedPoint(Location.X, Location.Y);
+            Location = nextPoint;
         }
 
         private Point GetNextPoint()
@@ -38,19 +38,21 @@ namespace Domains_MATH_RUN
                 for (var dy = -1; dy <= 1; dy++)
                 {
                     if (dx != 0 || dy != 0)
+                    {
                         if (x + dx >= 0 && x + dx < Field.Width
-                             && y + dy >= 0 && y + dy < Field.Height)
+                         && y + dy >= 0 && y + dy < Field.Height)
+                        {
+                            if (CreaturesEqual(Field.Map[x + dx, y + dy], new Finish(0, 0)))
+                                return new Point(x + dx, y + dy);
                             if (Field.Map[x + dx, y + dy] == null)
                                 return new Point(x + dx, y + dy);
+                        }
+                    }
                 }
             }
+            return new Point(int.MaxValue, int.MaxValue);
 
             throw new Exception("There is no next move");
-        }
-
-        private void Swap(Point current, Point next)
-        {
-            
         }
 
         public override bool Equals(object obj)
@@ -63,9 +65,12 @@ namespace Domains_MATH_RUN
                 && Location == otherPlayer.Location
                 && Health == otherPlayer.Health;
         }
+
+        private bool CreaturesEqual(ICreature creature, ICreature another)
+        {
+            if (another == null || creature == null)
+                return false;
+            return creature.Name == another.Name;
+        }
     }
-
-
-
-
 }
