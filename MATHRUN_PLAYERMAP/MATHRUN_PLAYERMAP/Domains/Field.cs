@@ -1,4 +1,5 @@
 ﻿using Domains_MATH_RUN.Domains;
+using MATHRUN_PLAYERMAP.Domains;
 using System;
 using System.Drawing;
 using System.Linq;
@@ -11,9 +12,9 @@ namespace Domains_MATH_RUN
         public int Height { get => Map.GetLength(1); }
         public int Width { get => Map.GetLength(0); }
 
-        public Field(string level)
+        public Field(Level level)
         {
-            Map = CreateMap(level);
+            Map = CreateMap(level.Map);
         }
 
         public Point GetLocationOf(Type creatureType)

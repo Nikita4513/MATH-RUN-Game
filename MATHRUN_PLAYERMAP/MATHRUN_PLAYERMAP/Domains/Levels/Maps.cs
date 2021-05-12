@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Domains_MATH_RUN
 {
-    public static class Levels
+    public static class Maps
     {
-        public static readonly string[] AllLevels = new[]
+        public static readonly string[] AllMaps = new[]
         {
             @"
 WWWWWWWWWWWWW
@@ -39,7 +39,24 @@ WWWWWW W
 W      W
 W WWWWWW
 W     FW
-WWWWWWWW"
+WWWWWWWW",
+
+            @"
+WWWWWWWWWWWWWWW
+W             W
+W WWWWWWWWWWWWW
+W W           W
+W W WWWWWWWWW W
+W W W       W W
+W W W WWWWW W W
+W W W WM..W W W
+W W W WWWPW W W
+W W W     W W W
+W W WWWWWWW W W
+W W         W W
+W WWWWWWWWWWW W
+W             W
+WWWWWWWWWWWWWWW"
         };
     }
 }
