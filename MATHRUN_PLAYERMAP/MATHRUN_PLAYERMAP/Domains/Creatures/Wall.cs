@@ -17,6 +17,8 @@ namespace Domains_MATH_RUN
             if (obj == null)
                 return false;
             var otherWall = obj as Wall;
+            if (otherWall == null)
+                return false;
             return Name == otherWall.Name
                 && Location == otherWall.Location;
         }
