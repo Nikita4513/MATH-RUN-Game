@@ -13,14 +13,18 @@ namespace Domains_MATH_RUN
             @"
 WWWWWWWWWWWWW
 WM...P     FW
-WWWWWWWWWWWWW",
+WWWWWWWWWWWWW
+             
+             ",
 
             @"
 WWWWWWWWWWWWWWWWWWWWWWWWWW
 WM.....P                 W
 WWWWWWWWWWWWWWWWWWWWWWWW W
 WF                       W
-WWWWWWWWWWWWWWWWWWWWWWWWWW",
+WWWWWWWWWWWWWWWWWWWWWWWWWW
+                          
+                          ",
 
             @"
 WWWWWWWWW
@@ -30,7 +34,9 @@ WWWP WWWW
 WWWW  WWW
 WWWWW  WW
 WWWWWW FW
-WWWWWWWWW",
+WWWWWWWWW
+         
+         ",
 
             @"
 WWWWWWWW
@@ -39,11 +45,13 @@ WWWWWW W
 W      W
 W WWWWWW
 W     FW
-WWWWWWWW",
+WWWWWWWW
+        
+        ",
 
             @"
 WWWWWWWWWWWWWWW
-W             W
+W            FW
 W WWWWWWWWWWWWW
 W W           W
 W W WWWWWWWWW W
@@ -56,7 +64,9 @@ W W WWWWWWW W W
 W W         W W
 W WWWWWWWWWWW W
 W             W
-WWWWWWWWWWWWWWW"
+WWWWWWWWWWWWWWW
+               
+               "
         };
     }
 }
