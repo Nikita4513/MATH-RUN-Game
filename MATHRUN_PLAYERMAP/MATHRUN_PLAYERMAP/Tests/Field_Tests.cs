@@ -1,5 +1,6 @@
 using Domains_MATH_RUN;
 using Domains_MATH_RUN.Domains;
+using MATHRUN_PLAYERMAP.Domains;
 //using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework;
 using System;
@@ -34,8 +35,9 @@ namespace TestProject1
         [Test]
         public static void InitializingField()
         {
-            var someLevel = @"
+            var someMap = @"
 PWM .F";
+            var someLevel = new Level(someMap, Difficulty.Easy);
             var field = new Field(someLevel);
             var creaturesField = new ICreature[]
             {

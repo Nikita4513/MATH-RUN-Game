@@ -1,4 +1,5 @@
 ﻿using Domains_MATH_RUN;
+using MATHRUN_PLAYERMAP.Domains;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,7 @@ namespace TestProject1
             Assert.AreEqual(excepted, nextPoint);
         }
 
+        [Test]
         public static void SimpleMonsterTest()
         {
             var field = new Field(Levels.AllLevels[0]);
