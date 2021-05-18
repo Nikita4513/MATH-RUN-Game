@@ -31,7 +31,7 @@ namespace MATHRUN_PLAYERMAP
         {
             this.components = new System.ComponentModel.Container();
             this.timer = new System.Windows.Forms.Timer(this.components);
-            this.timerMonster = new System.Windows.Forms.Timer(this.components);
+            //this.timerMonster = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // GameForm
@@ -40,7 +40,7 @@ namespace MATHRUN_PLAYERMAP
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Name = "GameForm";
-            this.Text = "Form1";
+            this.Text = "MathRUN";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.OnPaint);
             this.ResumeLayout(false);
 
@@ -49,7 +49,6 @@ namespace MATHRUN_PLAYERMAP
         #endregion
 
         private System.Windows.Forms.Timer timer;
-        private System.Windows.Forms.Timer timerMonster;
     }
 }
 
