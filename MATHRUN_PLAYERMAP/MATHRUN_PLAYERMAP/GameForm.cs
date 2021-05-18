@@ -8,18 +8,15 @@ namespace MATHRUN_PLAYERMAP
     public partial class GameForm : Form
     {
         private GameController gameController;
+        private MenuForm menuForm;
 
-        public GameForm()
+        public GameForm(MenuForm menuForm)
         {
             InitializeComponent();
+            this.menuForm = menuForm;
             timer.Interval = 1000;
-            timerMonster.Interval = 110;
-
             timer.Tick += new EventHandler(UpdateMonster);
-            //timerMonster.Tick += new EventHandler(UpdateMonster);
-
             KeyDown += new KeyEventHandler(OnPress);
-            //KeyUp += new KeyEventHandler(Update);
             SetStyle(ControlStyles.OptimizedDoubleBuffer
                 | ControlStyles.AllPaintingInWmPaint
                 | ControlStyles.UserPaint, true);
@@ -30,20 +27,16 @@ namespace MATHRUN_PLAYERMAP
         public void OnPaint(object sender, PaintEventArgs e)
         {
             var graphic = e.Graphics;
-            gameController.DrawMap(graphic, this);
-            //gameController.DrawQuestion(graphic);
+            gameController.DrawMap(graphic, this, timer, menuForm);
         }
 
 
         public void Init()
         {
             gameController = new GameController();
-            
             BackgroundImage = new Bitmap(Resource.ground, new Size(gameController.CellSize, gameController.CellSize)); 
             Size = new Size(gameController.Game.Field.Width * gameController.CellSize + 20,
                             gameController.Game.Field.Height * gameController.CellSize + 50);
-            //this.MaximumSize = Size;
-            //this.MinimumSize = Size;
             timer.Start();            
         }
 
@@ -53,15 +46,6 @@ namespace MATHRUN_PLAYERMAP
             BackgroundImage = new Bitmap(Resource.ground, new Size(gameController.CellSize, gameController.CellSize));
             Size = new Size(gameController.Game.Field.Width * gameController.CellSize + 20,
                             gameController.Game.Field.Height * gameController.CellSize + 50);
-            //this.MaximumSize = Size;
-            //this.MinimumSize = Size;
-            timer.Start();
-        }
-
-        public void UpdatePlayer(object sender, EventArgs e)
-        {
-            gameController.Game.Player.MoveNext();
-            Invalidate();
         }
 
         public void UpdateMonster(object sender, EventArgs e)
@@ -72,7 +56,7 @@ namespace MATHRUN_PLAYERMAP
 
         public void OnPress(object sender, KeyEventArgs e)
         {
-            gameController.CheckAnswer(sender, e);
+            gameController.ControlMovingPLayer(e);
             Invalidate();
         }
     }

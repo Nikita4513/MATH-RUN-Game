@@ -12,11 +12,5 @@ namespace MATHRUN_PLAYERMAP.Domains
         public static readonly Level[] AllLevels = Maps.AllMaps
             .Select(map => new Level(map, Difficulty.Easy))
             .ToArray();
-        //new[]
-        //{
-        //    new Level(Maps.AllMaps[0], Difficulty.Easy),
-        //    new Level(Maps.AllMaps[1], Difficulty.Easy),
-        //    new Level(Maps.AllMaps[2], )
-        //};
     }
 }

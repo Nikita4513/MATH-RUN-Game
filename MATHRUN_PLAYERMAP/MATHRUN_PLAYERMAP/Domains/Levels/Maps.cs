@@ -18,13 +18,13 @@ WWWWWWWWWWWWW
              ",
 
             @"
-WWWWWWWWWWWWWWWWWWWWWWWWWW
-WM.....P                 W
-WWWWWWWWWWWWWWWWWWWWWWWW W
-WF                       W
-WWWWWWWWWWWWWWWWWWWWWWWWWW
-                          
-                          ",
+WWWWWWWWWWWWWW
+WM.....P     W
+WWWWWWWWWWWW W
+WF           W
+WWWWWWWWWWWWWW
+              
+              ",
 
             @"
 WWWWWWWWW

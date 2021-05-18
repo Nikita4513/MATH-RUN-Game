@@ -31,6 +31,11 @@ namespace Domains_MATH_RUN
             InitializeGame();
         }
 
+        public void InitializeCurrentLevel()
+        {
+            InitializeGame();
+        }
+
         private void InitializeGame()
         {
             if (numberLevel >= Maps.AllMaps.Length)

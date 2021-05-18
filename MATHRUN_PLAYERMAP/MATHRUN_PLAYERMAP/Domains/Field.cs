@@ -32,6 +32,19 @@ namespace Domains_MATH_RUN
             throw new Exception("Player hasn't been found");
         }
 
+        public bool CreatureOnMap(Type typeCreature)
+        {
+            try
+            {
+                this.GetLocationOf(typeCreature);
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
+        }
+
         private ICreature[,] CreateMap(string map, string separator = "\r\n")
         {
             var rows = map.Split(new[] { separator }, StringSplitOptions.RemoveEmptyEntries);

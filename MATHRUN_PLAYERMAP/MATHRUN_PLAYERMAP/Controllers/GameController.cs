@@ -20,9 +20,9 @@ namespace MATHRUN_PLAYERMAP.Controllers
             Game = new Game();
         }
 
-        public void DrawMap(Graphics g, GameForm gameForm)
+        public void DrawMap(Graphics g, GameForm gameForm, Timer timer, MenuForm menuForm)
         {
-            CheckGameState(gameForm);
+            CheckGameState(gameForm, timer, menuForm);
             for (var x = 0; x < Game.Field.Width; x++)
             {
                 for (var y = 0; y < Game.Field.Height; y++)
@@ -68,36 +68,18 @@ namespace MATHRUN_PLAYERMAP.Controllers
                 new Rectangle(Game.Field.Width * CellSize / 4, Game.Field.Height * CellSize - CellSize, Game.Field.Width * CellSize, CellSize));
         }
 
-        public void CheckAnswer(object sender, KeyEventArgs e)
+        public void ControlMovingPLayer(KeyEventArgs e)
         {
             switch (e.KeyCode)
             {
                 case Keys.Left:
-                    if (Game.CurrentQuestion.IsRightAnswer(Game.CurrentQuestion.PossibleAnswers[0]))
-                    {
-                        Game.Scores++;
-                        Game.Player.MoveNext();
-                    }
-                    else
-                        Game.Scores--;
+                    ChangeGameStates(0);
                     break;
                 case Keys.Up:
-                    if (Game.CurrentQuestion.IsRightAnswer(Game.CurrentQuestion.PossibleAnswers[1]))
-                    {
-                        Game.Scores++;
-                        Game.Player.MoveNext();
-                    }
-                    else
-                        Game.Scores--;
+                    ChangeGameStates(1);
                     break;
                 case Keys.Right:
-                    if (Game.CurrentQuestion.IsRightAnswer(Game.CurrentQuestion.PossibleAnswers[2]))
-                    {
-                        Game.Scores++;
-                        Game.Player.MoveNext();
-                    }
-                    else
-                        Game.Scores--;
+                    ChangeGameStates(2);
                     break;
                 default:
                     return;
@@ -105,25 +87,39 @@ namespace MATHRUN_PLAYERMAP.Controllers
             Game.GetNextQuestion();
         }
 
-        private void CheckGameState(GameForm gameForm)
+        private void ChangeGameStates(int indexAnswer)
         {
-            if (Game.Scores <= 0)
-                gameForm.Init();
-            try
+            if (Game.CurrentQuestion.IsRightAnswer(Game.CurrentQuestion.PossibleAnswers[indexAnswer]))
             {
-                Game.Field.GetLocationOf(typeof(Player));
+                Game.Scores++;
+                Game.Player.MoveNext();
             }
-            catch
+            else
+                Game.Scores--;
+        }
+
+        private void CheckGameState(GameForm gameForm, Timer timer, MenuForm menuForm)
+        {
+            if (Game.Scores <= 0 || !Game.Field.CreatureOnMap(typeof(Player)))
             {
-                gameForm.Init();
+                timer.Stop();
+                var dialogResult = MessageBox.Show("Начать заново?", "Вы проиграли!", MessageBoxButtons.OKCancel);
+                if (dialogResult == DialogResult.OK)
+                {
+                    Game.InitializeCurrentLevel();
+                    timer.Start();
+                }
+                else if (dialogResult == DialogResult.Cancel)
+                {
+                    gameForm.Close();
+                    menuForm.Show();
+                }
+                return;
             }
-            try
-            {
-                Game.Field.GetLocationOf(typeof(Finish));
-            }
-            catch
+            if (!Game.Field.CreatureOnMap(typeof(Finish)))
             {
                 gameForm.InitNextLevel();
+                timer.Start();
             }
         }
 
