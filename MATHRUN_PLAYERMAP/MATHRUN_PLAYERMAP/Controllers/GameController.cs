@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -14,10 +15,17 @@ namespace MATHRUN_PLAYERMAP.Controllers
     {
         public Game Game { get; }
         public int CellSize { get => 50; }
+        private SoundPlayer gameOverSound;
+        private SoundPlayer stepSound;
+        private SoundPlayer wrongAnswerSound;
 
         public GameController()
         {
             Game = new Game();
+            gameOverSound = new SoundPlayer(Resource.gameover);
+            stepSound = new SoundPlayer(Resource.step);
+            wrongAnswerSound = new SoundPlayer(Resource.wronganswer);
+
         }
 
         public void DrawMap(Graphics g, GameForm gameForm, Timer timer, MenuForm menuForm)
@@ -29,22 +37,22 @@ namespace MATHRUN_PLAYERMAP.Controllers
                 {
                     if (Game.Field.Map[x, y] != null && Game.Field.Map[x, y].Name == "Wall")
                     {
-                        var wallImage = Resource.wall;
+                        var wallImage = Resource.Wall;
                         g.DrawImage(new Bitmap(wallImage, new Size(CellSize, CellSize)), x * CellSize, y * CellSize);
                     }
                     if (Game.Field.Map[x, y] != null && Game.Field.Map[x, y].Name == "Finish")
                     {
-                        var finishImage = Resource.finish;
+                        var finishImage = Resource.Finish;
                         g.DrawImage(new Bitmap(finishImage, new Size(CellSize, CellSize)), x * CellSize, y * CellSize);
                     }
                     if (Game.Field.Map[x, y] != null && Game.Field.Map[x, y].Name == "Player")
                     {
-                        var playerImage = Resource.player;
+                        var playerImage = Resource.Player;
                         g.DrawImage(new Bitmap(playerImage, new Size(CellSize, CellSize)), x * CellSize, y * CellSize);
                     }
                     if (Game.Field.Map[x, y] != null && Game.Field.Map[x, y].Name == "Monster")
                     {
-                        var monsterImage = Resource.monster;
+                        var monsterImage = Resource.Monster;
                         g.DrawImage(new Bitmap(monsterImage, new Size(CellSize, CellSize)), x * CellSize, y * CellSize);
                     }
                 }
@@ -56,13 +64,19 @@ namespace MATHRUN_PLAYERMAP.Controllers
         {
             //g.DrawRectangle(new Pen(Color.Red), new Rectangle(new Point(10, 10), new Size(10, 10)));
             g.DrawString(
-                "Вопрос: " + Game.CurrentQuestion.Value + "\t\t Очки: " + Game.Scores,
+                "Вопрос: " + Game.CurrentQuestion.Value,
                 new Font("Arial", 15),
                 new SolidBrush(Color.Aqua),
-                new Rectangle(Game.Field.Width * CellSize / 3 , Game.Field.Height * CellSize - 2 * CellSize + 5, Game.Field.Width * CellSize, CellSize));
+                new Rectangle(Game.Field.Width * CellSize / 3 , Game.Field.Height * CellSize - 2 * CellSize + 5, 0, 0));
 
             g.DrawString(
-                Game.CurrentQuestion.PossibleAnswers[0] + "\t\t" + Game.CurrentQuestion.PossibleAnswers[1] + "\t\t" + Game.CurrentQuestion.PossibleAnswers[2],
+                "HP: " + Game.Scores,
+                new Font("Arial", 15),
+                new SolidBrush(Color.MistyRose),
+                new Rectangle(0, Game.Field.Height * CellSize - 2 * CellSize + 5, 0, 0));
+
+            g.DrawString(
+                Game.CurrentQuestion.PossibleAnswers[0] + "◀\t" + Game.CurrentQuestion.PossibleAnswers[1] + "▲\t" + Game.CurrentQuestion.PossibleAnswers[2] + "▶",
                 new Font("Arial", 15),
                 new SolidBrush(Color.White),
                 new Rectangle(Game.Field.Width * CellSize / 4, Game.Field.Height * CellSize - CellSize, Game.Field.Width * CellSize, CellSize));
@@ -73,13 +87,13 @@ namespace MATHRUN_PLAYERMAP.Controllers
             switch (e.KeyCode)
             {
                 case Keys.Left:
-                    ChangeGameStates(0);
+                    ChangeGameStates((int)Answers.FirstAnswer);
                     break;
                 case Keys.Up:
-                    ChangeGameStates(1);
+                    ChangeGameStates((int)Answers.SecondAnswer);
                     break;
                 case Keys.Right:
-                    ChangeGameStates(2);
+                    ChangeGameStates((int)Answers.ThirdAnswer);
                     break;
                 default:
                     return;
@@ -87,15 +101,26 @@ namespace MATHRUN_PLAYERMAP.Controllers
             Game.GetNextQuestion();
         }
 
+        public void MonsterMoveNext()
+        {
+            stepSound.Play();
+            Game.Monster.MoveNext();
+        }
+
         private void ChangeGameStates(int indexAnswer)
         {
             if (Game.CurrentQuestion.IsRightAnswer(Game.CurrentQuestion.PossibleAnswers[indexAnswer]))
             {
                 Game.Scores++;
+                stepSound.Play();
                 Game.Player.MoveNext();
             }
             else
-                Game.Scores--;
+            {
+                wrongAnswerSound.Play();
+                Game.Scores -= 5;
+            }
+            
         }
 
         private void CheckGameState(GameForm gameForm, Timer timer, MenuForm menuForm)
@@ -103,6 +128,7 @@ namespace MATHRUN_PLAYERMAP.Controllers
             if (Game.Scores <= 0 || !Game.Field.CreatureOnMap(typeof(Player)))
             {
                 timer.Stop();
+                gameOverSound.Play();
                 var dialogResult = MessageBox.Show("Начать заново?", "Вы проиграли!", MessageBoxButtons.OKCancel);
                 if (dialogResult == DialogResult.OK)
                 {

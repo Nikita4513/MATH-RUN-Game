@@ -51,7 +51,7 @@ WWWWWWWW
 
             @"
 WWWWWWWWWWWWWWW
-W            FW
+W             W
 W WWWWWWWWWWWWW
 W W           W
 W W WWWWWWWWW W
@@ -59,7 +59,7 @@ W W W       W W
 W W W WWWWW W W
 W W W WM..W W W
 W W W WWWPW W W
-W W W     W W W
+W W W F   W W W
 W W WWWWWWW W W
 W W         W W
 W WWWWWWWWWWW W

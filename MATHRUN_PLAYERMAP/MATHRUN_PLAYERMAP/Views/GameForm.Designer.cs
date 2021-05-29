@@ -30,7 +30,7 @@ namespace MATHRUN_PLAYERMAP
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.timer = new System.Windows.Forms.Timer(this.components);
+            this.monsterTimer = new System.Windows.Forms.Timer(this.components);
             //this.timerMonster = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
@@ -48,7 +48,7 @@ namespace MATHRUN_PLAYERMAP
 
         #endregion
 
-        private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.Timer monsterTimer;
     }
 }
 

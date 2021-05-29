@@ -15,7 +15,7 @@ namespace MATHRUN_PLAYERMAP
         public MenuForm()
         {
             InitializeComponent();
-
+            this.CenterToScreen();
             this.Size = new Size(1000, 600);
             this.MaximumSize = Size;
             this.MinimumSize = Size;
@@ -23,9 +23,8 @@ namespace MATHRUN_PLAYERMAP
             StartButton.Click += (sender, args) =>
             {
                 var gameForm = new GameForm(this);
-                gameForm.Show(); // отображаем Form2
+                gameForm.Show();
                 this.Hide();
-                //while (gameForm.Is)
             };
 
             SettingsButton.Click += (sender, args) =>
@@ -45,6 +44,11 @@ namespace MATHRUN_PLAYERMAP
                 if (result != DialogResult.Yes)
                     eventArgs.Cancel = true;
             };
+        }
+
+        private void pictureBox5_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

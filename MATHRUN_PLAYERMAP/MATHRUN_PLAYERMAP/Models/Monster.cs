@@ -50,8 +50,6 @@ namespace Domains_MATH_RUN
                 }
             }
             return new Point(int.MaxValue, int.MaxValue);
-
-            throw new Exception("There is no next move");
         }
 
         public override bool Equals(object obj)
@@ -69,9 +67,7 @@ namespace Domains_MATH_RUN
             if (another == null || creature == null)
                 return false;
             return creature.Name == another.Name;
-        }
-
-        
+        }   
     }
 
 

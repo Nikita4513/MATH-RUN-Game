@@ -14,43 +14,59 @@ namespace MATHRUN_PLAYERMAP
         {
             InitializeComponent();
             this.menuForm = menuForm;
-            timer.Interval = 1000;
-            timer.Tick += new EventHandler(UpdateMonster);
+            this.CenterToScreen();
+            monsterTimer.Interval = 1000;
+            monsterTimer.Tick += new EventHandler(UpdateMonster);
             KeyDown += new KeyEventHandler(OnPress);
-            SetStyle(ControlStyles.OptimizedDoubleBuffer
-                | ControlStyles.AllPaintingInWmPaint
-                | ControlStyles.UserPaint, true);
-            UpdateStyles();
+
+            FormClosing += (sender, eventArgs) =>
+            {
+                menuForm.Show();
+            };
+
+            DoubleBuffered = true;
+
+            //SetStyle(ControlStyles.OptimizedDoubleBuffer
+            //    | ControlStyles.AllPaintingInWmPaint
+            //    | ControlStyles.UserPaint, true);
+            //UpdateStyles();
             Init();
         }
 
         public void OnPaint(object sender, PaintEventArgs e)
         {
             var graphic = e.Graphics;
-            gameController.DrawMap(graphic, this, timer, menuForm);
+            gameController.DrawMap(graphic, this, monsterTimer, menuForm);
         }
 
 
         public void Init()
         {
             gameController = new GameController();
-            BackgroundImage = new Bitmap(Resource.ground, new Size(gameController.CellSize, gameController.CellSize)); 
+
+            BackgroundImage = new Bitmap(Resource.Ground, new Size(gameController.CellSize, gameController.CellSize)); 
             Size = new Size(gameController.Game.Field.Width * gameController.CellSize + 20,
                             gameController.Game.Field.Height * gameController.CellSize + 50);
-            timer.Start();            
+            monsterTimer.Start();            
         }
 
         public void InitNextLevel()
         {
-            gameController.Game.ChangeOnNextLevel();
-            BackgroundImage = new Bitmap(Resource.ground, new Size(gameController.CellSize, gameController.CellSize));
+            if (!gameController.Game.TryGetNextLevel())
+            {
+                monsterTimer.Stop();
+                this.Close();
+                menuForm.Show();
+                return;
+            }
+            BackgroundImage = new Bitmap(Resource.Ground, new Size(gameController.CellSize, gameController.CellSize));
             Size = new Size(gameController.Game.Field.Width * gameController.CellSize + 20,
                             gameController.Game.Field.Height * gameController.CellSize + 50);
         }
 
         public void UpdateMonster(object sender, EventArgs e)
         {
-            gameController.Game.Monster.MoveNext();
+            gameController.MonsterMoveNext();
             Invalidate();
         }
 

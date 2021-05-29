@@ -11,6 +11,7 @@ namespace Domains_MATH_RUN
         public Monster Monster { get; private set; }
         public Field Field { get; private set; }
         public Question CurrentQuestion { get; private set; }
+        public bool IsOver { get; set; }
         private int numberLevel = 0;
 
 
@@ -25,10 +26,13 @@ namespace Domains_MATH_RUN
             return CurrentQuestion;
         }
 
-        public void ChangeOnNextLevel()
+        public bool TryGetNextLevel()
         {
             numberLevel++;
+            if (numberLevel >= Levels.AllLevels.Length)
+                return false;
             InitializeGame();
+            return true;
         }
 
         public void InitializeCurrentLevel()
