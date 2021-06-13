@@ -27,11 +27,6 @@ namespace MATHRUN_PLAYERMAP
                 this.Hide();
             };
 
-            SettingsButton.Click += (sender, args) =>
-            {
-
-            };
-
             ExitButton.Click += (sender, eventArgs) => Close();
 
             //AboutGameButton.Click += (sender, eventArgs) => new AboutGameForm().Show();
@@ -44,11 +39,6 @@ namespace MATHRUN_PLAYERMAP
                 if (result != DialogResult.Yes)
                     eventArgs.Cancel = true;
             };
-        }
-
-        private void pictureBox5_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

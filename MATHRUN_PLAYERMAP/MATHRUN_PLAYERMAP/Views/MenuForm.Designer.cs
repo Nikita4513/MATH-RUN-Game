@@ -32,12 +32,10 @@ namespace MATHRUN_PLAYERMAP
         private void InitializeComponent()
         {
             this.ButtonsPanel = new System.Windows.Forms.Panel();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.ExitButton = new System.Windows.Forms.Button();
-            this.SettingsButton = new System.Windows.Forms.Button();
             this.StartButton = new System.Windows.Forms.Button();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureNameGame = new System.Windows.Forms.PictureBox();
-            this.AboutGameButton = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
@@ -57,40 +55,20 @@ namespace MATHRUN_PLAYERMAP
             // 
             this.ButtonsPanel.BackgroundImage = global::MATHRUN_PLAYERMAP.Resource.Finish;
             this.ButtonsPanel.Controls.Add(this.ExitButton);
-            this.ButtonsPanel.Controls.Add(this.SettingsButton);
             this.ButtonsPanel.Controls.Add(this.StartButton);
             this.ButtonsPanel.Location = new System.Drawing.Point(319, 200);
             this.ButtonsPanel.Name = "ButtonsPanel";
-            this.ButtonsPanel.Size = new System.Drawing.Size(336, 229);
+            this.ButtonsPanel.Size = new System.Drawing.Size(336, 195);
             this.ButtonsPanel.TabIndex = 0;
-            // 
-            // pictureBox5
-            // 
-            this.pictureBox5.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox5.Image = global::MATHRUN_PLAYERMAP.Resource.Monster;
-            this.pictureBox5.Location = new System.Drawing.Point(880, 74);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(61, 62);
-            this.pictureBox5.TabIndex = 7;
-            this.pictureBox5.TabStop = false;
             // 
             // ExitButton
             // 
-            this.ExitButton.Location = new System.Drawing.Point(68, 152);
+            this.ExitButton.Location = new System.Drawing.Point(68, 85);
             this.ExitButton.Name = "ExitButton";
             this.ExitButton.Size = new System.Drawing.Size(193, 38);
             this.ExitButton.TabIndex = 2;
             this.ExitButton.Text = "Выйти из игры";
             this.ExitButton.UseVisualStyleBackColor = true;
-            // 
-            // SettingsButton
-            // 
-            this.SettingsButton.Location = new System.Drawing.Point(68, 95);
-            this.SettingsButton.Name = "SettingsButton";
-            this.SettingsButton.Size = new System.Drawing.Size(193, 38);
-            this.SettingsButton.TabIndex = 1;
-            this.SettingsButton.Text = "Настройки";
-            this.SettingsButton.UseVisualStyleBackColor = true;
             // 
             // StartButton
             // 
@@ -104,6 +82,16 @@ namespace MATHRUN_PLAYERMAP
             this.StartButton.UseMnemonic = false;
             this.StartButton.UseVisualStyleBackColor = true;
             // 
+            // pictureBox5
+            // 
+            this.pictureBox5.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox5.Image = global::MATHRUN_PLAYERMAP.Resource.Monster;
+            this.pictureBox5.Location = new System.Drawing.Point(880, 74);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(61, 62);
+            this.pictureBox5.TabIndex = 7;
+            this.pictureBox5.TabStop = false;
+            // 
             // pictureNameGame
             // 
             this.pictureNameGame.BackColor = System.Drawing.Color.Silver;
@@ -113,15 +101,6 @@ namespace MATHRUN_PLAYERMAP
             this.pictureNameGame.Size = new System.Drawing.Size(378, 99);
             this.pictureNameGame.TabIndex = 1;
             this.pictureNameGame.TabStop = false;
-            // 
-            // AboutGameButton
-            // 
-            this.AboutGameButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.AboutGameButton.Location = new System.Drawing.Point(921, 482);
-            this.AboutGameButton.Name = "AboutGameButton";
-            this.AboutGameButton.Size = new System.Drawing.Size(49, 44);
-            this.AboutGameButton.TabIndex = 2;
-            this.AboutGameButton.UseVisualStyleBackColor = true;
             // 
             // pictureBox1
             // 
@@ -187,7 +166,6 @@ namespace MATHRUN_PLAYERMAP
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.AboutGameButton);
             this.Controls.Add(this.pictureNameGame);
             this.Controls.Add(this.ButtonsPanel);
             this.Name = "MenuForm";
@@ -209,9 +187,7 @@ namespace MATHRUN_PLAYERMAP
         private Panel ButtonsPanel;
         private Button StartButton;
         private Button ExitButton;
-        private Button SettingsButton;
         private PictureBox pictureNameGame;
-        private Button AboutGameButton;
         private PictureBox pictureBox5;
         private PictureBox pictureBox1;
         private PictureBox pictureBox2;

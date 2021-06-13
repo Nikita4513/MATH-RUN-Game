@@ -145,7 +145,6 @@ namespace MATHRUN_PLAYERMAP.Controllers
             if (!Game.Field.CreatureOnMap(typeof(Finish)))
             {
                 gameForm.InitNextLevel();
-                timer.Start();
             }
         }
 

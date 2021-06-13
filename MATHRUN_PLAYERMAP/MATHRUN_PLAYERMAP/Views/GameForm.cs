@@ -18,18 +18,12 @@ namespace MATHRUN_PLAYERMAP
             monsterTimer.Interval = 1000;
             monsterTimer.Tick += new EventHandler(UpdateMonster);
             KeyDown += new KeyEventHandler(OnPress);
-
             FormClosing += (sender, eventArgs) =>
             {
                 menuForm.Show();
             };
 
             DoubleBuffered = true;
-
-            //SetStyle(ControlStyles.OptimizedDoubleBuffer
-            //    | ControlStyles.AllPaintingInWmPaint
-            //    | ControlStyles.UserPaint, true);
-            //UpdateStyles();
             Init();
         }
 
@@ -47,6 +41,8 @@ namespace MATHRUN_PLAYERMAP
             BackgroundImage = new Bitmap(Resource.Ground, new Size(gameController.CellSize, gameController.CellSize)); 
             Size = new Size(gameController.Game.Field.Width * gameController.CellSize + 20,
                             gameController.Game.Field.Height * gameController.CellSize + 50);
+            MaximumSize = Size;
+            MinimumSize = Size;
             monsterTimer.Start();            
         }
 
@@ -54,7 +50,7 @@ namespace MATHRUN_PLAYERMAP
         {
             if (!gameController.Game.TryGetNextLevel())
             {
-                monsterTimer.Stop();
+                //monsterTimer.Stop();
                 this.Close();
                 menuForm.Show();
                 return;
