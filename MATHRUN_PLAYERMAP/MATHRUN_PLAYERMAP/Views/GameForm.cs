@@ -37,12 +37,9 @@ namespace MATHRUN_PLAYERMAP
         public void Init()
         {
             gameController = new GameController();
-
             BackgroundImage = new Bitmap(Resource.Ground, new Size(gameController.CellSize, gameController.CellSize)); 
             Size = new Size(gameController.Game.Field.Width * gameController.CellSize + 20,
                             gameController.Game.Field.Height * gameController.CellSize + 50);
-            MaximumSize = Size;
-            MinimumSize = Size;
             monsterTimer.Start();            
         }
 
