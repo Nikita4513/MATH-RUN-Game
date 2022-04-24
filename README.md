@@ -15,5 +15,4 @@
 <img src="screenshots/screen2.png" width="500">
 
 ### После того как игрок добежал до финиша, сразу открывается следующий лабиринт
-<button>btn</button>
 	
